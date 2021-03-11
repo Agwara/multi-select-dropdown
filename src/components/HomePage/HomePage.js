@@ -8,6 +8,7 @@ import BasketStack from "../BasketStack/BasketStack";
 import "./HomePage.css";
 
 const HomePage = (props) => {
+    // App State
     const [user, setUser] = useState({}) 
     const [apples, setApples] = useState(10)
     const [oranges, setOranges] = useState(10)
@@ -23,6 +24,7 @@ const HomePage = (props) => {
     }
 
 
+    // Refresh Page
     const refreshPage = () => {
         window.location.reload();
     }
@@ -32,6 +34,7 @@ const HomePage = (props) => {
         setErrorMesasage("")
     }
 
+    // Add Apple to Basket
     const onAddApple = () => {
         if (user.permission === "all") {
             if (apples > 0) {
@@ -44,6 +47,7 @@ const HomePage = (props) => {
  
     }
 
+    // Remove Apple from basket
     const onRemoveApple = () => {
         if (user.permission === "all") {
             if (apples < 10 && (basketStack[basketStack.length - 1] === "apple")) {
@@ -60,6 +64,7 @@ const HomePage = (props) => {
 
     }
 
+    // Add orange to basket
     const onAddOrange = () => {
         if (user.permission === "all") {
             if (oranges > 0) {
@@ -72,6 +77,7 @@ const HomePage = (props) => {
 
     }
 
+    // Remove orange from basket
     const onRemoveOrange = () => {
         if (user.permission === "all") {
             if (oranges < 10 && (basketStack[basketStack.length - 1] === "orange")) {
@@ -118,6 +124,7 @@ const HomePage = (props) => {
 
 
     useEffect(() => {
+        // Check if user is saved in session storage
         if (sessionStorage.getItem("user")) {  
             setUser(JSON.parse(sessionStorage.getItem("user")))
         }
