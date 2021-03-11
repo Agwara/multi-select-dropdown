@@ -33,61 +33,88 @@ const HomePage = (props) => {
     }
 
     const onAddApple = () => {
-        if (apples > 0) {
-            setApples(apples - 1)
-            setBasketStack((basketStack) => [...basketStack, "apple"]) 
-        } 
+        if (user.permission === "all") {
+            if (apples > 0) {
+                setApples(apples - 1)
+                setBasketStack((basketStack) => [...basketStack, "apple"]) 
+            }
+        } else {
+            setErrorMesasage("You are not authorized to make this changes")
+        }
+ 
     }
 
     const onRemoveApple = () => {
-        if (apples < 10 && (basketStack[basketStack.length - 1] === "apple")) {
-            setApples(apples + 1) 
-
-            basketStack.pop()
-            setBasketStack(basketStack)
+        if (user.permission === "all") {
+            if (apples < 10 && (basketStack[basketStack.length - 1] === "apple")) {
+                setApples(apples + 1) 
+    
+                basketStack.pop()
+                setBasketStack(basketStack)
+            } else {
+                setErrorMesasage("Apple is not at the top or in the basket!")
+            }
         } else {
-            setErrorMesasage("Apple is not at the top or in the basket!")
+            setErrorMesasage("You are not authorized to make this changes")
         }
+
     }
 
     const onAddOrange = () => {
-        if (oranges > 0) {
-            setOranges(oranges - 1)
-            setBasketStack((basketStack) => [...basketStack, "orange"]) 
+        if (user.permission === "all") {
+            if (oranges > 0) {
+                setOranges(oranges - 1)
+                setBasketStack((basketStack) => [...basketStack, "orange"]) 
+            }
+        } else {
+            setErrorMesasage("You are not authorized to make this changes")
         }
+
     }
 
     const onRemoveOrange = () => {
-        if (oranges < 10 && (basketStack[basketStack.length - 1] === "orange")) {
+        if (user.permission === "all") {
+            if (oranges < 10 && (basketStack[basketStack.length - 1] === "orange")) {
 
-            setOranges(oranges + 1) 
-
-            basketStack.pop()
-            setBasketStack(basketStack)
+                setOranges(oranges + 1) 
+    
+                basketStack.pop()
+                setBasketStack(basketStack)
+            } else {
+                setErrorMesasage("Apple is not at the top or in the basket!")
+            }
         } else {
-            setErrorMesasage("Orange is not at the top or in the basket!")
+            setErrorMesasage("You are not authorized to make this changes")
         }
+
     }
 
     const onAddGrape = () => {
-        if (grapes > 0) {
-            setGrapes(grapes - 1)
-            setBasketStack((basketStack) => [...basketStack, "grape"]) 
-        } 
-    }
-
-    const onRemoveGrape = () => {
-        if (grapes < 10 && (basketStack[basketStack.length - 1] === "grape")) {
-            setGrapes(grapes + 1) 
-
-            basketStack.pop()
-            setBasketStack(basketStack)
+        if (user.permission === "all") {
+            if (grapes > 0) {
+                setGrapes(grapes - 1)
+                setBasketStack((basketStack) => [...basketStack, "grape"]) 
+            } 
         } else {
-            setErrorMesasage("Grape is not at the top or in the basket!")
+            setErrorMesasage("You are not authorized to make this changes")
         }
     }
 
+    const onRemoveGrape = () => {
+        if (user.permission === "all") {
+            if (grapes < 10 && (basketStack[basketStack.length - 1] === "grape")) {
+                setGrapes(grapes + 1) 
+    
+                basketStack.pop()
+                setBasketStack(basketStack)
+            } else {
+                setErrorMesasage("Grape is not at the top or in the basket!")
+            }
+        } else {
+            setErrorMesasage("You are not authorized to make this changes")
+        }
 
+    }
 
 
     useEffect(() => {
