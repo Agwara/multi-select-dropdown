@@ -18,7 +18,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #B2F09F;
+  background-color: #404B5A;
+
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+
 }
 
 code {
