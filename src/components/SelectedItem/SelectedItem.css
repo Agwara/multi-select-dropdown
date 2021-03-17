@@ -1,0 +1,24 @@
+.selected-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    height: 3rem;
+    border-radius: 2px;
+    width: max-content;
+    padding: 1rem;
+    background-color: #178BE9;
+    color: #fff;
+
+    text-transform: capitalize;
+    transition: all .4s;
+}
+
+.selected-item:hover {
+    background-color: red;
+}

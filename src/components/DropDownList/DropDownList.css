@@ -1,0 +1,35 @@
+.drop-down-list {
+    display: flex;
+    flex-direction: column;
+    height: 20rem;
+
+    overflow: auto;
+}
+
+.drop-down-list__action {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #5FB4F9;
+    margin: 1rem 0rem;
+}
+
+.drop-down__select {
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.drop-down__clear {
+    cursor: pointer;
+}
+
+.drop-down__select:hover {
+    color:  #178be9;
+}
+
+.drop-down__clear:hover {
+    color: red;
+}

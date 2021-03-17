@@ -1,0 +1,11 @@
+.search__container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.items__search {
+    font-size: 1.8rem;
+    padding: .5rem;
+    outline: none;
+} 

@@ -1,0 +1,114 @@
+.drop-down {
+    height: min-content;
+    width: 30rem;
+
+    background-color: #f5f5f5;
+    padding: 1rem;
+
+}
+
+/* 
+    THE HEADER STYLE
+*/    
+.drop-down__header {
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    border-radius: 2px;
+    border: 1px solid #333;
+    width: max-content;
+    margin: 0 auto;
+    padding: 1rem;
+    cursor: pointer;
+
+    transition: all .4s;
+}
+
+.drop-down__header:hover {
+    background-color: #404B5A;
+    color: #fff;
+}
+
+.drop-down--show {
+    display: flex;
+    flex-direction: column;
+}
+
+.drop-down--hide {
+    display: none;
+}
+
+.clear-all {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: .5rem;
+
+    color: rgb(218, 64, 64);
+    cursor: pointer;
+
+    transition: all .4s;
+}
+
+.display-none {
+    display: none;
+}
+
+.clear-all:hover {
+    color: red;
+}
+
+.selected-item-container {
+    border: 1px solid rgb(143, 143, 143);
+    padding: .5rem;
+}
+
+.selected-item-list {
+    overflow: auto;
+    height: 10rem;
+
+    display: flex;
+    grid-gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.drop-down__cancel-submit {
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.drop-down__cancel-btn {
+    border-radius: 2px;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: .5rem;
+    background-color: rgb(240, 102, 102);
+    color: white;
+
+    cursor: pointer;
+
+    transition: all .4s;
+}
+
+.drop-down__done-btn {
+    border-radius: 2px;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: .5rem;
+    background-color: #5FB4F9;
+    color: white;
+
+    cursor: pointer;
+
+    transition: all .4s;
+}
+
+.drop-down__cancel-btn:hover {
+    background-color: red;
+}
+
+.drop-down__done-btn:hover {
+    background-color:  #178be9;
+}
