@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import "./ParentComponent.css"
 
@@ -16,6 +16,8 @@ const ParentComponent = (props) => {
 
     const [selectedItems, setSelectedItems] = useState([])
 
+    const node = useRef();
+
 
     useEffect(() => {
         const items = []
@@ -25,7 +27,18 @@ const ParentComponent = (props) => {
         
         setFilteredItems(items)
 
-    },[props.data])
+        // ADD AN EVENT LISTENER WHEN THE COMPONENT FIRST MOUNTS
+        if (showDropDown) {
+            document.addEventListener('click', handleClickOutside);
+        } else {
+            document.removeEventListener('click', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+
+
+    },[props.data, showDropDown])
 
 
     // FUNCTION TO SET THE FILTER TEXT
@@ -41,6 +54,7 @@ const ParentComponent = (props) => {
         })
         setFilteredItems(filteredItems)
     }
+
 
     const onClickListener = (name) => {
         if (!selectedItems.includes(name)) {
@@ -76,29 +90,43 @@ const ParentComponent = (props) => {
         setSelectedItems([])
     }
 
+    const handleClickOutside = (e) => {
+        if (node.current && node.current.contains(e.target)) {
+          return;
+        }
+        // EMPTY THE SELECTED ITEM ARRAY AND CLOSE THE DROP DOWN
+        setShowDropDown(false);
+      };
+
     return (
-        <section className="drop-down">
+        <section id="drop-down" className="drop-down" ref={node} onClick={handleClickOutside}>
 
-            <div className={selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
-                {
-                    selectedItems.map((name, key) => {
-                        return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
-                    })
-                }
+            <div className="white-background">
+
+                <div className={selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
+                    {
+                        selectedItems.map((name, key) => {
+                            return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
+                        })
+                    }
+                </div>
+
+                <InputSearchBox 
+                    onSearchChange={onSearchChange} 
+                    showDropDownInput={showDropDownInput} 
+                    onDone={onDone}
+                />
+
             </div>
-
-            <InputSearchBox 
-                onSearchChange={onSearchChange} 
-                showDropDownInput={showDropDownInput} 
-                onDone={onDone}
-            />
 
             <div className={showDropDown ? "drop-down--show" : "drop-down--hide"}>
                 <DropDownList 
                     filteredItems={filteredItems}
                     onClickListener={onClickListener}
+                    onDone={onDone}
                 />
             </div>
+
         </section>
     )
 }

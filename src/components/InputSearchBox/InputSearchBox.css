@@ -1,11 +1,19 @@
 .search__container {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    border: none;
 }
 
 .items__search {
     font-size: 1.8rem;
     padding: .5rem;
     outline: none;
+    width: 100%;
+
+    border: none;
+    background-color: #fff;
 } 

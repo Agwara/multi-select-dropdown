@@ -28,7 +28,6 @@ const InputSearchBox = (props) => {
                 onChange={onSearchChange}
                 onClick={showDropDownInput}
                 onKeyPress={handleKeyPress}
-                autoFocus
             />
         </div>
 
