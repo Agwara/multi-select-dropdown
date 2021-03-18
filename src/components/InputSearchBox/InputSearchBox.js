@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./InputSearchBox.css"
+import SelectedItem from "../SelectedItem/SelectedItem"
 
 const InputSearchBox = (props) => {
     
@@ -18,16 +19,29 @@ const InputSearchBox = (props) => {
             props.onDone()
         }
     }
+
+    const removeSelectedItem = (name) => {
+        props.removeSelectedItem(name)
+    }
  
     return (
-        <div className="search__container">
+        <div className="search-box-container">
+            <div className={props.selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
+                {
+                    props.selectedItems.map((name, key) => {
+                        return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
+                    })
+                }
+            </div>
+
             <input
                 type="search"
-                placeholder="I'm looking for..."
+                placeholder="Search..."
                 className="items__search"
                 onChange={onSearchChange}
                 onClick={showDropDownInput}
                 onKeyPress={handleKeyPress}
+                autoFocus={true}
             />
         </div>
 

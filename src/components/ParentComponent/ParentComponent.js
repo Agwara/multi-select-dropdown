@@ -5,7 +5,7 @@ import "./ParentComponent.css"
 import InputSearchBox from "../InputSearchBox/InputSearchBox";
 
 import DropDownList from "../DropDownList/DropDownList";
-import SelectedItem from "../SelectedItem/SelectedItem"
+// import SelectedItem from "../SelectedItem/SelectedItem"
 
 
 const ParentComponent = (props) => {
@@ -36,8 +36,6 @@ const ParentComponent = (props) => {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-
-
     },[props.data, showDropDown])
 
 
@@ -55,7 +53,6 @@ const ParentComponent = (props) => {
         setFilteredItems(filteredItems)
     }
 
-
     const onClickListener = (name) => {
         if (!selectedItems.includes(name)) {
             setSelectedItems((selectedItems) => ([...selectedItems, name]))
@@ -64,7 +61,6 @@ const ParentComponent = (props) => {
         }      
 
     }
-
 
     // REMOVES SELECTED ITEMS FROM THE ARRAY OF SELECTED ITEMS
     const removeSelectedItem = (name) => {
@@ -100,25 +96,15 @@ const ParentComponent = (props) => {
 
     return (
         <section id="drop-down" className="drop-down" ref={node} onClick={handleClickOutside}>
-
-            <div className="white-background">
-
-                <div className={selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
-                    {
-                        selectedItems.map((name, key) => {
-                            return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
-                        })
-                    }
-                </div>
-
-                <InputSearchBox 
-                    onSearchChange={onSearchChange} 
-                    showDropDownInput={showDropDownInput} 
-                    onDone={onDone}
-                />
-
-            </div>
-
+            
+            <InputSearchBox 
+                selectedItems={selectedItems}
+                onSearchChange={onSearchChange} 
+                showDropDownInput={showDropDownInput} 
+                onDone={onDone}
+                removeSelectedItem={removeSelectedItem}
+            />
+   
             <div className={showDropDown ? "drop-down--show" : "drop-down--hide"}>
                 <DropDownList 
                     filteredItems={filteredItems}
