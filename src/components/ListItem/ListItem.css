@@ -5,7 +5,13 @@
     padding: 1rem;
     border-bottom: 1px solid rgb(221, 218, 218);
 
-    cursor: pointer;
+    transition: all .4s;
+
+    cursor: pointer; 
+}
+
+.list-item__container:hover {
+    background-color: skyblue;
 }
 
 .list-item__text {
@@ -13,19 +19,5 @@
 
     font-size: 1.5rem;
     font-weight: 500;
-    color: black;
-}
-
-.show-color {
-    background-color: #5FB4F9;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
-}
-
-.hide-color {
-    background-color: #e8edf1;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
+    color: rgb(92, 90, 90);
 }

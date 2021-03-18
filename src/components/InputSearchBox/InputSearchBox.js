@@ -12,6 +12,12 @@ const InputSearchBox = (props) => {
     const showDropDownInput = () => {
         props.showDropDownInput()
     }
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            props.onDone()
+        }
+    }
  
     return (
         <div className="search__container">
@@ -21,6 +27,8 @@ const InputSearchBox = (props) => {
                 className="items__search"
                 onChange={onSearchChange}
                 onClick={showDropDownInput}
+                onKeyPress={handleKeyPress}
+                autoFocus
             />
         </div>
 

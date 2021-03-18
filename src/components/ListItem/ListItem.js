@@ -10,7 +10,6 @@ const ListItem = (props) => {
 
     return (
         <div onClick={onClickListener} className="list-item__container">
-            <span className="show-color"></span>
             <p className="list-item__text">{props.name}</p>
         </div>
     )

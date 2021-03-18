@@ -10,7 +10,7 @@ import SelectedItem from "../SelectedItem/SelectedItem"
 
 const ParentComponent = (props) => {
     const [showDropDown, setShowDropDown] = useState(false)  
-    const [showSelectedContainer, setShowSelectedContainer] = useState(false)
+    // const [showSelectedContainer, setShowSelectedContainer] = useState(false)
 
     const [filteredItems, setFilteredItems] = useState([])
 
@@ -49,7 +49,6 @@ const ParentComponent = (props) => {
             return true;
         }      
 
-        setShowSelectedContainer(true)
     }
 
 
@@ -66,61 +65,39 @@ const ParentComponent = (props) => {
         setSelectedItems(items)
     }
 
-    // FUNCTION TO CLEAR ALL ITEMS
-    const onClearAll = () => {
-        setSelectedItems([])
-
-        setShowSelectedContainer(false)  // Close the selected items container
-    }
-
     const showDropDownInput = () => {
         setShowDropDown(true)
     }
 
-    // Clear all fields and close the dropdown
-    const onCancel =  () => {
-        setSelectedItems([])
-
-        setShowDropDown(false)
-        setShowSelectedContainer(false)
-    }
-
-    // Submit the selected items.
+    // When the user is done with the selection, send the data.
     const onDone = () => {
         setShowDropDown(false)
         console.log("Here are the chosen values: ", selectedItems)
-        setShowSelectedContainer(false)
+        setSelectedItems([])
     }
 
     return (
         <section className="drop-down">
-            <div className={showSelectedContainer ? "selected-item-container" : "display-none"}>
-                <p onClick={onClearAll} className="clear-all">Clear All</p>
-                
-                <div className="selected-item-list">
-                    {
-                        selectedItems.map((name, key) => {
-                            return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
-                        })
-                    }
-                </div>
+
+            <div className={selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
+                {
+                    selectedItems.map((name, key) => {
+                        return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
+                    })
+                }
             </div>
 
-            <InputSearchBox onSearchChange={onSearchChange} showDropDownInput={showDropDownInput} />
+            <InputSearchBox 
+                onSearchChange={onSearchChange} 
+                showDropDownInput={showDropDownInput} 
+                onDone={onDone}
+            />
 
             <div className={showDropDown ? "drop-down--show" : "drop-down--hide"}>
                 <DropDownList 
                     filteredItems={filteredItems}
-                    onDone={onDone} 
-                    onCancel={onCancel} 
                     onClickListener={onClickListener}
                 />
-
-                <div className="drop-down__cancel-submit">
-                    <p className="drop-down__cancel-btn" onClick={onCancel}>Cancel</p>
-
-                    <p className="drop-down__done-btn" onClick={onDone}>Done</p>
-                </div>
             </div>
         </section>
     )
