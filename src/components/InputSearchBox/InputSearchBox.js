@@ -26,17 +26,23 @@ const InputSearchBox = (props) => {
  
     return (
         <div className="search-box-container">
-            <div className={props.selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
+            {/* <div className={props.selectedItems.length > 0 ? "selected-item-list" : "display-none"}>  
                 {
                     props.selectedItems.map((name, key) => {
                         return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
                     })
                 }
-            </div>
+            </div> */}
+
+            {
+                props.selectedItems.map((name, key) => {
+                    return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
+                })
+            }
 
             <input
                 type="search"
-                placeholder="Search..."
+                placeholder="Items"
                 className="items__search"
                 onChange={onSearchChange}
                 onClick={showDropDownInput}

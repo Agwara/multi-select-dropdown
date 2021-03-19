@@ -9,7 +9,7 @@ const SelectedItem = (props) => {
 
     return (
         <div className="selected-item" onClick={removeSelectedItem}>
-            {props.name}
+            <p className="item-name">{props.name}</p><p className="remove-sign">&times;</p>
         </div>
     )
 
