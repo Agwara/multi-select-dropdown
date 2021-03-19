@@ -6,7 +6,7 @@ import ParentComponent from "./components/ParentComponent/ParentComponent"
 
 import * as serviceWorker from './serviceWorker';
 
-import {fruits} from "./data/fruits"
+import {fruits} from "./data/fruits";   // DATA SOURCE.
 
 ReactDOM.render(<ParentComponent data={fruits} />, document.getElementById('root'));
 

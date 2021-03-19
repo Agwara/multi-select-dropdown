@@ -7,10 +7,6 @@
 
 }
 
-.white-background {
-    background-color: #fff;
-}
-
 .drop-down--show {
     display: flex;
     flex-direction: column;
@@ -20,7 +16,3 @@
     display: none;
 }
 
-.display-none {
-    display: none;
-    opacity: 0;
-}

@@ -3,6 +3,11 @@ import React from "react";
 import "./DropDownList.css"
 import ListItem from "../ListItem/ListItem";
 
+
+/* 
+    THIS COMPONENT RENDERS THE LIST OF FILTERED ITEMS
+*/
+
 const DropDownList = (props) => {
 
     const onClickListener = (name) => {

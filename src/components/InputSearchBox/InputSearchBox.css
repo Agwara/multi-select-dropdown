@@ -16,13 +16,6 @@
     border-bottom: 1px solid #333;
 }
 
-.selected-item-list {
-    display:flex;
-    grid-gap: .5rem;
-    align-items:center;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-}
 
 .items__search {
     flex-grow: 1;

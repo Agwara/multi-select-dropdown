@@ -1,7 +1,7 @@
 .drop-down-list {
     display: flex;
     flex-direction: column;
-    height: 20rem;
+    max-height: 20rem;
 
     overflow: auto;
 }

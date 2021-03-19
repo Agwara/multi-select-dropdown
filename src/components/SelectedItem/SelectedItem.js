@@ -2,6 +2,9 @@ import React from "react"
 
 import "./SelectedItem.css"
 
+/*
+    THIS COMPONENT RENDERS SELECTED ITEMS 
+*/    
 const SelectedItem = (props) => {
     const removeSelectedItem = () => {
         props.removeSelectedItem(props.name)

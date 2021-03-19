@@ -5,20 +5,18 @@ import "./ParentComponent.css"
 import InputSearchBox from "../InputSearchBox/InputSearchBox";
 
 import DropDownList from "../DropDownList/DropDownList";
-// import SelectedItem from "../SelectedItem/SelectedItem"
-
 
 const ParentComponent = (props) => {
-    const [showDropDown, setShowDropDown] = useState(false)  
-    // const [showSelectedContainer, setShowSelectedContainer] = useState(false)
-
-    const [filteredItems, setFilteredItems] = useState([])
-
-    const [selectedItems, setSelectedItems] = useState([])
+    const [showDropDown, setShowDropDown] = useState(false)  // DROP DOWN STATE
+    const [filteredItems, setFilteredItems] = useState([])   // FILTERED ITEMS STATE
+    const [selectedItems, setSelectedItems] = useState([])   // SELECTED ITEMS STATE
 
     const node = useRef();
 
 
+    /* 
+        SETUP EVENT LISTENERS WHEN THE PARENT COMPONENT MOUNTS
+    */    
     useEffect(() => {
         const items = []
         props.data.map((item) => {
@@ -39,7 +37,9 @@ const ParentComponent = (props) => {
     },[props.data, showDropDown])
 
 
-    // FUNCTION TO SET THE FILTER TEXT
+    /*
+        FUNCTION TO CHANGE THE DROP DOWN ITEMS BASED ON USER'S INPUT TEXT
+    */    
     const onSearchChange = (value) => {
         const filteredItems = []
         
@@ -53,6 +53,11 @@ const ParentComponent = (props) => {
         setFilteredItems(filteredItems)
     }
 
+    
+    /*
+        THIS FUNCTIONS FIRES WHEN A USER CLICKS WHEN A USERS CLICKS
+        AN ITEMS IN THE DROP DOWN
+    */    
     const onClickListener = (name) => {
         if (!selectedItems.includes(name)) {
             setSelectedItems((selectedItems) => ([...selectedItems, name]))
@@ -62,7 +67,9 @@ const ParentComponent = (props) => {
 
     }
 
-    // REMOVES SELECTED ITEMS FROM THE ARRAY OF SELECTED ITEMS
+    /*
+        THIS FUNCTION REMOVES SELECTED ITEMS FROM THE ARRAY OF SELECTED ITEMS
+    */    
     const removeSelectedItem = (name) => {
         const items = []
 
@@ -79,13 +86,19 @@ const ParentComponent = (props) => {
         setShowDropDown(true)
     }
 
-    // When the user is done with the selection, send the data.
+    /* 
+        THIS FUNCTION IS FIRED WHEN A USER CLICKS THE "ENTER" BUTTON
+    */
     const onDone = () => {
         setShowDropDown(false)
         console.log("Here are the chosen values: ", selectedItems)
         setSelectedItems([])
     }
 
+    /*
+        THIS FUNCTION IS USED TO CLOSE THE DROP DOWN WHEN A 
+        USER CLICKS OUTSIDE THE AREA
+    */    
     const handleClickOutside = (e) => {
         if (node.current && node.current.contains(e.target)) {
           return;
@@ -96,7 +109,6 @@ const ParentComponent = (props) => {
 
     return (
         <section id="drop-down" className="drop-down" ref={node} onClick={handleClickOutside}>
-            
             <InputSearchBox 
                 selectedItems={selectedItems}
                 onSearchChange={onSearchChange} 
