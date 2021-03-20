@@ -29,6 +29,7 @@ const InputSearchBox = (props) => {
     const handleKeyPress = (event) => {
         if ((event.key === "Enter") && (props.minSelectAmount > props.selectedItems.length)) {
             props.onSetErrorMessage()
+            
         } else if (event.key === "Enter") {
             props.onDone()
         }

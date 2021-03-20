@@ -64,6 +64,9 @@ const ParentComponent = (props) => {
             setSelectedItems((selectedItems) => ([...selectedItems, name]))
         } else if ((selectedItems.length === props.maxSelectAmount)) {
             setErrorMessage(`Number items selected should not exceed: ${props.maxSelectAmount}`)
+            setTimeout(() => {
+                setErrorMessage("")
+            }, 3000)
         }
     }
 
@@ -112,6 +115,9 @@ const ParentComponent = (props) => {
     */
     const onSetErrorMessage = () => {
         setErrorMessage(`Number items selected should not be less than: ${props.maxSelectAmount}`)
+        setTimeout(() => {
+            setErrorMessage("")
+        }, 3000)
     }    
 
     /* 

@@ -18,8 +18,8 @@
 
 .show-error-message {
     flex: 1;
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
     width: 100%;
     text-align: center;
     color: red;
