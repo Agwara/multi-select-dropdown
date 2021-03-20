@@ -11,6 +11,7 @@ const InputSearchBox = (props) => {
     const onSearchChange = (event) => {
         props.onSearchChange(event.target.value)   // THIS FUNCTION FIILTERS THE ITEMS 
         props.showDropDownInput()   // SHOWS DROP DOWN WHEN A USER TYPES 
+        props.onRemoveErrorMessage()
     }
 
     /* 
@@ -18,6 +19,7 @@ const InputSearchBox = (props) => {
     */    
     const showDropDownInput = () => {
         props.showDropDownInput()
+        props.onRemoveErrorMessage()
     }
 
     /* 
@@ -25,7 +27,9 @@ const InputSearchBox = (props) => {
         INPUT FIELD IS ON FOCUS.
     */    
     const handleKeyPress = (event) => {
-        if (event.key === "Enter") {
+        if ((event.key === "Enter") && (props.minSelectAmount > props.selectedItems.length)) {
+            props.onSetErrorMessage()
+        } else if (event.key === "Enter") {
             props.onDone()
         }
     }
@@ -36,12 +40,25 @@ const InputSearchBox = (props) => {
     const removeSelectedItem = (name) => {
         props.removeSelectedItem(name)
     }
- 
+
+
+    /* 
+        THIS FUNCTION REMOVES THE ERROR MESSAGE
+    */
+    const removeErrorMessage = () => {
+        props.onRemoveErrorMessage()
+    }
+
     return (
         <div className="search-box-container">
             {
                 props.selectedItems.map((name, key) => {
-                    return <SelectedItem name={name} key={key} removeSelectedItem={removeSelectedItem} />
+                    return <SelectedItem 
+                                name={name} 
+                                key={key} 
+                                removeSelectedItem={removeSelectedItem} 
+                                removeErrorMessage={removeErrorMessage}
+                            />
                 })
             }
 
@@ -52,6 +69,7 @@ const InputSearchBox = (props) => {
                 onChange={onSearchChange}
                 onClick={showDropDownInput}
                 onKeyPress={handleKeyPress}
+                onFocus={removeErrorMessage}
                 autoFocus
             />
         </div>

@@ -10,6 +10,7 @@ const ParentComponent = (props) => {
     const [showDropDown, setShowDropDown] = useState(false)  // DROP DOWN STATE
     const [filteredItems, setFilteredItems] = useState([])   // FILTERED ITEMS STATE
     const [selectedItems, setSelectedItems] = useState([])   // SELECTED ITEMS STATE
+    const [errorMessage, setErrorMessage] = useState([])     // ERROR MESSAGE STATE
 
     const node = useRef();
 
@@ -44,9 +45,9 @@ const ParentComponent = (props) => {
         const filteredItems = []
         
         // SELECT THE FILTERED ITEMS FROM USER'S TEXT INPUT
-        props.data.filter(fruit => {
-            if (fruit.toLowerCase().includes(value.toLowerCase())) {
-                filteredItems.push(fruit)
+        props.data.filter(item => {
+            if (item.toLowerCase().includes(value.toLowerCase())) {
+                filteredItems.push(item)
             }
             return true;
         })
@@ -59,12 +60,11 @@ const ParentComponent = (props) => {
         AN ITEMS IN THE DROP DOWN
     */    
     const onClickListener = (name) => {
-        if (!selectedItems.includes(name)) {
+        if (!selectedItems.includes(name) && ((selectedItems.length + 1) <= props.maxSelectAmount)) {
             setSelectedItems((selectedItems) => ([...selectedItems, name]))
-        } else {
-            return true;
-        }      
-
+        } else if ((selectedItems.length === props.maxSelectAmount)) {
+            setErrorMessage(`Number items selected should not exceed: ${props.maxSelectAmount}`)
+        }
     }
 
     /*
@@ -105,7 +105,21 @@ const ParentComponent = (props) => {
         }
         // EMPTY THE SELECTED ITEM ARRAY AND CLOSE THE DROP DOWN
         setShowDropDown(false);
-      };
+    };
+
+    /*
+        THIS FUNCTION SETS THE ERROR MESSAGE
+    */
+    const onSetErrorMessage = () => {
+        setErrorMessage(`Number items selected should not be less than: ${props.maxSelectAmount}`)
+    }    
+
+    /* 
+        THIS FUNCTION REMOVES THE ERROR MESSAGE
+    */
+    const onRemoveErrorMessage = () => {
+        setErrorMessage("")
+    }    
 
     return (
         <section id="drop-down" className="drop-down" ref={node} onClick={handleClickOutside}>
@@ -115,15 +129,20 @@ const ParentComponent = (props) => {
                 showDropDownInput={showDropDownInput} 
                 onDone={onDone}
                 removeSelectedItem={removeSelectedItem}
+                minSelectAmount= {props.minSelectAmount}
+                onSetErrorMessage={onSetErrorMessage}
+                onRemoveErrorMessage={onRemoveErrorMessage}
             />
+        
+            <p className={errorMessage ? "show-error-message" : "close-error-message"}>{errorMessage}</p>        
    
-            <div className={showDropDown ? "drop-down--show" : "drop-down--hide"}>
-                <DropDownList 
-                    filteredItems={filteredItems}
-                    onClickListener={onClickListener}
-                    onDone={onDone}
-                />
-            </div>
+            <DropDownList 
+                filteredItems={filteredItems}
+                onClickListener={onClickListener}
+                onDone={onDone}
+                showDropDown={showDropDown}
+                onRemoveErrorMessage={onRemoveErrorMessage}
+            />
 
         </section>
     )

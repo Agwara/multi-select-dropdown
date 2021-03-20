@@ -14,19 +14,20 @@ const DropDownList = (props) => {
         props.onClickListener(name)
     }
 
-    return (
-        <div className="drop-down-list">
-            <ul>
+    // SHOW THE DROP DONW IF "props.showDropDown" IS TRUE
+    if (props.showDropDown) {
+        return (
+            <ul className="drop-down-list">
                 {
                     props.filteredItems.map((name, key) => {
                         return <ListItem name={name} key={key} onClickListener={onClickListener} />
                     })
                 }
             </ul>
-
-        </div>
-
-    )
+        )
+    } else {
+        return <div></div>
+    }
 }
 
 export default DropDownList;
